@@ -1,0 +1,182 @@
+ * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 1140px;
+  height: auto;
+  margin: 0 auto;
+  font-family: "Merriweather", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  color: black;
+  background-color: rgb(255, 255, 255);
+}
+
+/* Top Container */
+
+/* .top-container {
+  height: 110px;
+}
+
+.headersection {
+  background-color: rgb(105, 105, 105);
+  float: left;
+  height: 95px;
+  margin-top: 16px;
+}
+
+h1 {
+  color: rgb(239, 192, 39);
+  padding: 25px 30px;
+  font-size: 40px;
+  font-weight: 900;
+}
+
+h1 a {
+  color: rgb(239, 192, 39);
+  text-decoration: none;
+}
+
+hr {
+  background-color: rgb(105, 105, 105);
+}
+
+.navsection {
+  float: right;
+  margin-top: 55px;
+  margin-right: 30px;
+}
+
+.navsection nav ul li {
+  display: inline-block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  font-size: 17px;
+  border-bottom: 3px solid transparent;
+}
+
+.navsection nav ul li a {
+  text-decoration: none;
+  color: black;
+}
+
+.navsection nav ul li a:hover {
+  color: rgb(239, 192, 39);
+}
+
+/* Middle Container */
+
+ h2 {
+  margin: 40px auto 20px;
+  font-style: italic;
+}
+
+p {
+  text-align: justify;
+  line-height: 36px;
+}
+
+.middle-container {
+  width: 90%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.middle-container-div a {
+  font-size: 20px;
+  font-weight: 900;
+  float: right;
+  padding: 5px;
+  color: rgb(239, 192, 39);
+  text-decoration: none;
+}
+.middle-container-div a:hover {
+  color: #ff2442;
+} */
+
+/* Gallary Container */
+
+ .gallary-container {
+  margin-bottom: 30px;
+}
+.gallary-img {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.gallary-img img {
+  width: 300px;
+  height: 200px;
+}
+
+
+
+@media only screen and (max-width: 480px) {
+  body {
+    width: 100%;
+    font-size: 16px;
+  }
+
+  .headersection {
+    width: 100%;
+    text-align: center;
+  }
+
+  .navsection {
+    text-align: center;
+    width: 100%;
+    margin: 30px auto;
+  }
+
+  hr {
+    display: none;
+  }
+
+  .middle-container {
+    width: 90%;
+    margin-top: 120px;
+  }
+
+  h2 {
+    margin-top: 50px;
+  }
+
+  p {
+    text-align: justify;
+    line-height: 30px;
+  }
+
+  .gallary-container > h2 {
+    text-align: center;
+  }
+
+  .gallary-img > img {
+    margin-top: 15px;
+  }
+}  
+
+.App {
+  text-align: center;
+}
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 10vh;
+  background-color:rgb(73, 79, 82);
+  color: white;
+}
+
+.nav-links {
+  width: 40%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  list-style: none;
+}
