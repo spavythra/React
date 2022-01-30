@@ -5,6 +5,7 @@ import {filterBoxAction} from "../store/TodoStore/TodoActions";
 
 const FilterTodo = (props) => {
     const {todos, filter, setFilter, index} = props;
+
     return (<>
         {todos[index].tasks.length > 0 &&
         <ul className="filters">

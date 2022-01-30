@@ -9,6 +9,7 @@ export const useOpen = () => {
     const [open, setOpen] = useState(false)
     return { open, setOpen }
 }
+
 export const useShow = () => {
     const [show, setShow] = useState(false)
     return { show, setShow }

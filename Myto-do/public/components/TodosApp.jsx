@@ -15,6 +15,8 @@ import {DragDropContext, Droppable} from "react-beautiful-dnd";
 const TodosApp = (props) => {
     const {todos, updateTodoAction, deleteTodoAction, remaining, updateTasksAction, updateBoxPositionAction} = props;
     const [currentBox, setCurrentBox] = useState(null)
+    const [Categoryfilter, setCategoryfilter] = useState(false)
+    const [order,setOrder] = useState('asc')
 
     function resetIds(array) {
         array.map((elem, index) => {
@@ -58,7 +60,6 @@ const TodosApp = (props) => {
 
         if (start === finish) {
             let newTasks = Array.from(start.tasks);
-
 
             newTasks.splice(source.index, 1);
             newTasks.splice(destination.index, 0, start.tasks[taskId]);
@@ -134,9 +135,37 @@ const TodosApp = (props) => {
         }
     }
 
+    const renderList = () => {
+        console.log(todos)
+        return todos.map((todo, index) => {
+            if (todo.categoryfilter === null){
+                return <Todos
+                remaining={remaining(index).length}
+                title={todo.title}
+                filter={todo.filter}
+                index={index}
+                updateTodoAction={updateTodoAction}
+                deleteTodoAction={deleteTodoAction}
+                key={todo.title + index}
+                tasks={todo.tasks}/>
+            }else if (todo.categoryfilter === todo.critical){
+                return <Todos
+                remaining={remaining(index).length}
+                title={todo.title}
+                filter={todo.filter}
+                index={index}
+                updateTodoAction={updateTodoAction}
+                deleteTodoAction={deleteTodoAction}
+                key={todo.title + index}
+                tasks={todo.tasks}/>
+            }
+        })
+    }
+
 
     return (<>
         <div className="content_wrapper">
+            
             <ActionBar/>
             <DragDropContext
                 onDragUpdate={onDragUpdate}
@@ -150,17 +179,9 @@ const TodosApp = (props) => {
                         <div className="listBox"
                              {...provided.droppableProps}
                              ref={provided.innerRef}>
-                            {todos.map((todo, index) => {
-                                return <Todos
-                                    remaining={remaining(index).length}
-                                    title={todo.title}
-                                    filter={todo.filter}
-                                    index={index}
-                                    updateTodoAction={updateTodoAction}
-                                    deleteTodoAction={deleteTodoAction}
-                                    key={todo.title + index}
-                                    tasks={todo.tasks}/>
-                            })}
+
+                                 {renderList()}
+                            
                             {provided.placeholder}
                             <AddBox/>
                         </div>
@@ -175,11 +196,13 @@ export default connect(
     (state) => ({
         todos: todosSelector(state),
         remaining: (index) => todosRemainingSelector(state, index),
+        categoryfilter:(index) => filterCategorySelector(state, index),
     }),
     (dispatch) => ({
         updateTodoAction: todo => dispatch(updateTodoAction(todo)),
         updateBoxPositionAction: todo => dispatch(updateBoxPositionAction(todo)),
         updateTasksAction: (todo, index) => dispatch(updateTasksAction(todo, index)),
         deleteTodoAction: todo => dispatch(deleteTodoAction(todo)),
+
     })
 )(TodosApp)

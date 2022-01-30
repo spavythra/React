@@ -2,14 +2,18 @@ import React, {useRef} from 'react';
 import TextEditable from "./TextEditable";
 import {CloseSquare, Delete, Edit, MoreCircle} from "react-iconly";
 import {connect} from "react-redux";
-import {todosTitleSelector} from "../store/TodoStore/TodoSelectors";
-import {deleteBoxAction, deleteCompleted, updateTodoTitle} from "../store/TodoStore/TodoActions";
+import {todosTitleSelector, filterCategorySelector} from "../store/TodoStore/TodoSelectors";
+import {deleteBoxAction, deleteCompleted, updateTodoTitle,toggleCategoryAction} from "../store/TodoStore/TodoActions";
 import clsx from "clsx";
 import DropDown from "./Common/DropDown";
 import {useEditing, useOpen} from "../Hooks/hook";
 
+import {Checkbox, Tooltip} from "@nextui-org/react";
+import {todosSelector} from "../store/TodoStore/TodoSelectors"
+
+
 function TaskHeader(props) {
-    const {count, index, title, updateTitle, deleteCompleted, deleteBoxAction} = props;
+    const {count, index, title, todos, updateTitle, critical, deleteCompleted, deleteBoxAction, toggleCategoryAction} = props;
     const {isEditing, setIsEditing} = useEditing();
     const {open, setOpen} = useOpen();
 
@@ -45,13 +49,24 @@ function TaskHeader(props) {
                               index={index}
                               setParent={setIsEditing}/>
                 {!isEditing && <p className="task_count">{count}</p>}
+
+
+                    
             </div>
             {!isEditing && <div className="box_header--action">
+            <Checkbox color="error" className={'category_checkbox'} checked={todos[index].critical}
+                            onChange={() => {toggleCategoryAction({todos, idx: index}) 
+                        }}>
+                <div style={{display: 'flex', flexDirection: 'column', marginLeft: -4,fontSize: '14px',fontWeight: 'bold',color: 'red'}}>
+                            <p className="category_name">Critical</p>
+                        </div>
+                    </Checkbox>
                 <button className="btn box_header--button icon-button" ref={buttonRef}
                         style={open ? {pointerEvents: 'none'} : null}
                         onClick={() => setOpen(true)}>
                     <MoreCircle set="bold" size={20}/>
                 </button>
+                
             </div>}
         </header>
         {!isEditing && <DropDown menuList={menuList} marginPos={marginPos} top={top} open={open} setOpen={setOpen}
@@ -61,11 +76,14 @@ function TaskHeader(props) {
 
 export default connect(
     (state) => ({
-        title: (index) => todosTitleSelector(state, index)
+        title: (index) => todosTitleSelector(state, index),
+        critical: (index) => filterCategorySelector(state, index),
+        todos: todosSelector(state)
     }),
     (dispatch) => ({
         updateTitle: state => dispatch(updateTodoTitle(state)),
         deleteCompleted: state => dispatch(deleteCompleted(state)),
-        deleteBoxAction: state => dispatch(deleteBoxAction(state))
+        deleteBoxAction: state => dispatch(deleteBoxAction(state)),
+        toggleCategoryAction: state => dispatch(toggleCategoryAction(state))
     })
 )(TaskHeader)

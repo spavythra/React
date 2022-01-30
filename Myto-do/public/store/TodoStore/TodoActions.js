@@ -10,7 +10,10 @@ import {
     FILTER_BOX_ACTION,
     UPDATE_TASKS_ACTION,
     UPDATE_BOX_POSITION_ACTION,
-    FILTER_APP_ACTION, DELETE_COMPLETED_APP_ACTION
+    FILTER_APP_ACTION, 
+    DELETE_COMPLETED_APP_ACTION,
+    FILTER_CATEGORY_ACTION,
+    TOGGLE_CATEGORY_ACTION
 } from './TodoConstants'
 
 export const addTodoAction = (state) => ({
@@ -33,6 +36,10 @@ export const toggleTodoAction = (state) => ({
     type: TOGGLE_TODO_ACTION,
     payload: {task: {...state.task, completed: !state.task.completed}, index: state.index}
 })
+export const toggleCategoryAction = (state) => ({
+    type: TOGGLE_CATEGORY_ACTION,
+    payload: {...state, critical: !state.critical}
+})
 export const deleteTodoAction = (state) => ({
     type: DELETE_TODO_ACTION,
     payload: state
@@ -53,6 +60,11 @@ export const addBoxAction = (state) => ({
 export const filterBoxAction = (state) => ({
     type: FILTER_BOX_ACTION,
     payload: state
+})
+export const filterCategoryAction = (state) => ({
+    type: FILTER_CATEGORY_ACTION,
+    payload: state
+
 })
 export const setAppFilters = (state) => ({
     type: FILTER_APP_ACTION,

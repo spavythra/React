@@ -9,6 +9,8 @@ import {addBoxAction} from "../store/TodoStore/TodoActions";
 import {useBox} from "../Hooks/hook";
 import AddPop from './AddPop';
 
+let number = 0;
+
 function AddBox(props) {
     const {isEditing, setIsEditing, value, setValue, handleClose} = useBox()
 
@@ -16,7 +18,8 @@ function AddBox(props) {
 
     const handleSave = () => {
         setIsEditing(false)
-        addBoxAction({title: value, filter: null, tasks: []})
+        addBoxAction({title: value,id: number+1, filter: null, tasks: [], categoryfilter: null, critical: false})
+        number++;
         setValue('')
     }
 

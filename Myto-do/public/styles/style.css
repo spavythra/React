@@ -214,9 +214,6 @@ h2 {
     left: 285px;
   }
 
-  /* .close-btn button{
-      align-items: center;
-  } */
 
   @media only screen and (max-width: 480px){
     .middle-container {
@@ -248,9 +245,6 @@ h2 {
       }
   }
 
-/* .editable:hover {
-    background: #363636;
-} */
 
 .simple_content {
     font-size: 20px;
@@ -332,9 +326,7 @@ h2 {
     border-radius: 5px;
     cursor: auto;
     transition: all .3s ease;
-    /* background: black; */
     background: #ffffff;
-    /* color: black; */
 }
 
 .box_dragging {
@@ -349,12 +341,15 @@ h2 {
     justify-content: space-between;
     height: 44px;
     flex: 0 0 44px;
-    width: 288px;
+    width: 278px;
     padding-right: 16px;
     padding-left: 8px;
     border-bottom: 1px solid transparent;
     transition: border-bottom-color .3s;
     cursor: grab;
+
+    background-color: rgb(224, 219, 219);
+      
 }
 
 .box_header::before {
@@ -457,7 +452,6 @@ h2 {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    /* color: rgba(255, 255, 255, 0.87); */
     color: black;
 }
 

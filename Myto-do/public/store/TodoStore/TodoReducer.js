@@ -8,11 +8,15 @@ import {
     UPDATE_TASKS_ACTION,
     UPDATE_TODO_ACTION,
     UPDATE_TODO_TITLE,
-    UPDATE_BOX_POSITION_ACTION, FILTER_BOX_ACTION, FILTER_APP_ACTION, DELETE_COMPLETED_APP_ACTION
+    UPDATE_BOX_POSITION_ACTION, 
+    FILTER_BOX_ACTION, 
+    FILTER_APP_ACTION, 
+    DELETE_COMPLETED_APP_ACTION,
+    TOGGLE_CATEGORY_ACTION,
+    FILTER_CATEGORY_ACTION
 } from './TodoConstants';
 
 const initialState = []
-
 
 export function todosReducer(state = initialState, action) {
     switch (action.type) {
@@ -24,7 +28,6 @@ export function todosReducer(state = initialState, action) {
                         id: id,
                         completed: false,
                         name: action.payload.value,
-                        description: action.payload.description
                     })
                     return todo
                 }
@@ -36,10 +39,19 @@ export function todosReducer(state = initialState, action) {
                 if (i === index) {
                     const indexById = todo.tasks.findIndex((obj => obj.id === task.id))
                     todo.tasks[indexById] = task;
+                    
                     return todo
                 }
                 return todo
             })
+        case TOGGLE_CATEGORY_ACTION:
+            const {todoCat, idx} = action.payload;
+            return state.map((todo,i) => {
+                if (i === idx) {
+                    return {...todo, critical: action.payload.critical}
+                }
+            return todo
+            })             
         case UPDATE_TODO_ACTION:
             return state.map((todo, i) => {
                 if (i === action.payload.index) {
@@ -47,7 +59,6 @@ export function todosReducer(state = initialState, action) {
                     todo.tasks[todo.tasks.indexOf(findTask)] = {
                         id: action.payload.updated.id,
                         name: action.payload.updated.name,
-                        description: action.payload.updated.description,
                     };
                     return todo;
                 }
@@ -110,6 +121,11 @@ export function todosReducer(state = initialState, action) {
         case FILTER_APP_ACTION:
             return state.map((todo) => {
                 return {...todo, filter: action.payload}
+            })
+        
+        case FILTER_CATEGORY_ACTION:
+            return state.map((todo) => {
+                return {...todo, categoryfilter: action.payload}
             })
         case ADD_BOX_ACTION:
             return [...state, action.payload]
