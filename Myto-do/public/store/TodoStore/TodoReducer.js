@@ -35,6 +35,8 @@ export function todosReducer(state = initialState, action) {
             })
         case TOGGLE_TODO_ACTION:
             const {task, index} = action.payload;
+                        console.log(task)
+
             return state.map((todo, i) => {
                 if (i === index) {
                     const indexById = todo.tasks.findIndex((obj => obj.id === task.id))
@@ -45,13 +47,14 @@ export function todosReducer(state = initialState, action) {
                 return todo
             })
         case TOGGLE_CATEGORY_ACTION:
-            const {todoCat, idx} = action.payload;
-            return state.map((todo,i) => {
-                if (i === idx) {
-                    return {...todo, critical: action.payload.critical}
+            const {tododef, idx} = action.payload;
+            return state.map((todo, i) => {
+                if (i === action.payload.idx) {
+                   tododef.critical = action.payload.critical;
+                    return todo
                 }
-            return todo
-            })             
+                return todo
+            })    
         case UPDATE_TODO_ACTION:
             return state.map((todo, i) => {
                 if (i === action.payload.index) {

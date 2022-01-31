@@ -2,7 +2,7 @@ export const todosSelector = ({todos}) => todos
 export const todosRemainingSelector = (state, index) => state.todos[index].tasks.filter(task => !task.completed)
 export const todosTitleSelector = (state, index) => state.todos[index].title
 export const filterBoxSelector = (state, index) => state.todos[index].filter
-export const filterCategorySelector = (state, index) => {state.todos[index].categoryfilter}
+export const filterCategorySelector = (state, index) => state.todos[index].categoryfilter
 
 export const todosCompletedSelector = ({todos}) => todos.filter(todo => todo.completed)
 

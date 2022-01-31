@@ -38,7 +38,7 @@ export const toggleTodoAction = (state) => ({
 })
 export const toggleCategoryAction = (state) => ({
     type: TOGGLE_CATEGORY_ACTION,
-    payload: {...state, critical: !state.critical}
+    payload: {...state,critical: !state.tododef.critical, index: state.idx}
 })
 export const deleteTodoAction = (state) => ({
     type: DELETE_TODO_ACTION,

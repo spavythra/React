@@ -3,7 +3,7 @@ import TextEditable from "./TextEditable";
 import {CloseSquare, Delete, Edit, MoreCircle} from "react-iconly";
 import {connect} from "react-redux";
 import {todosTitleSelector, filterCategorySelector} from "../store/TodoStore/TodoSelectors";
-import {deleteBoxAction, deleteCompleted, updateTodoTitle,toggleCategoryAction} from "../store/TodoStore/TodoActions";
+import {deleteBoxAction, deleteCompleted, updateTodoTitle,toggleCategoryAction,filterCategoryAction} from "../store/TodoStore/TodoActions";
 import clsx from "clsx";
 import DropDown from "./Common/DropDown";
 import {useEditing, useOpen} from "../Hooks/hook";
@@ -13,10 +13,10 @@ import {todosSelector} from "../store/TodoStore/TodoSelectors"
 
 
 function TaskHeader(props) {
-    const {count, index, title, todos, updateTitle, critical, deleteCompleted, deleteBoxAction, toggleCategoryAction} = props;
+    const {count, index, idx, title, todos, updateTitle, toggleCategory, filterCategoryAction, critical, deleteCompleted, deleteBoxAction, toggleCategoryAction} = props;
     const {isEditing, setIsEditing} = useEditing();
     const {open, setOpen} = useOpen();
-
+    const tododef = todos[index];
 
     /* Dropdown Props */
     const buttonRef = useRef()
@@ -54,9 +54,10 @@ function TaskHeader(props) {
                     
             </div>
             {!isEditing && <div className="box_header--action">
-            <Checkbox color="error" className={'category_checkbox'} checked={todos[index].critical}
-                            onChange={() => {toggleCategoryAction({todos, idx: index}) 
-                        }}>
+            <Checkbox color="error" className={'category_checkbox'} checked={tododef.critical}
+                            onChange={() => {toggleCategoryAction({tododef, idx: index}) 
+{                            {filterCategoryAction(tododef.critical)}
+}                           console.log(tododef.critical)}}>
                 <div style={{display: 'flex', flexDirection: 'column', marginLeft: -4,fontSize: '14px',fontWeight: 'bold',color: 'red'}}>
                             <p className="category_name">Critical</p>
                         </div>
@@ -84,6 +85,8 @@ export default connect(
         updateTitle: state => dispatch(updateTodoTitle(state)),
         deleteCompleted: state => dispatch(deleteCompleted(state)),
         deleteBoxAction: state => dispatch(deleteBoxAction(state)),
-        toggleCategoryAction: state => dispatch(toggleCategoryAction(state))
+        toggleCategoryAction: state => dispatch(toggleCategoryAction(state)),
+        filterCategoryAction: state => dispatch(filterCategoryAction(state))
+
     })
 )(TaskHeader)

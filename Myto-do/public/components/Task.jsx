@@ -47,10 +47,10 @@ function Task(props) {
                      ref={provided.innerRef}
                      className={clsx('task', snapshot.isDragging ? 'task_dragging' : null)}>
                     <Checkbox rounded color="#5c3eac" className={'task_checkbox'} checked={task.completed}
-                              onChange={() => toggleTodoAction({task, index: tabIndex})} line>
+                              onChange={() => {toggleTodoAction({task, index: tabIndex})
+                              console.log(task.completed)}} line>
                         <div style={{display: 'flex', flexDirection: 'column', marginLeft: 8}}>
                             <span className="task_name">{task.name}</span>
-                            <span className="task_description">{task.description}</span>
                         </div>
                     </Checkbox>
                     <Tooltip content="Edit task" color="#282828" position="bottomStart"
@@ -67,7 +67,7 @@ function Task(props) {
         </Draggable>}
 
         {editing === refId &&
-        <TodoForm nameValue={task.name} descValue={task.description} buttonText={'Edit a task'}
+        <TodoForm nameValue={task.name}  buttonText={'Edit a task'}
                   updateTodoAction={updateTodoAction} task={task} tabIndex={tabIndex} show={editing === refId}
                   setShow={setEditing}/>}
 
