@@ -14,45 +14,39 @@ const ViewTask = (props) => {
     const renderList = () => {
         let total_length = todos.length;
         let count = 0;
-        
-        if(todos.length == 0){
-            return(
-            <div className="todo-container">
-                <p style={{marginLeft:'30px',fontSize:'20px'}}> No pending tasks!</p>
-            </div>)
-        }
+        let pending_tasks = [];
 
-        return todos.map((todo, index) => {
-            
-            if(todo.tasks.length == 0){
-                count++;
-                if(count == total_length){
-                    return(
-                    <div className="todo-container">
-                        <p style={{marginLeft:'30px',fontSize:'20px'}}> No pending tasks!</p>
-                    </div>)
+        todos.map((todo,index) =>{
+            todo.tasks.map((task,id) =>{
+                if(task.completed == false){
+                    console.log("dd")
+                    pending_tasks.push(task.name);
                 }
-            }
-            return(
-        
-                todo.tasks.map((task,id)=>{
-                    console.log(task.completed)
-                   
-                        if(task.completed === false){
-                            return(
-                                <div className="todo-container">
-                                <ul className="todo-list">
-                                    <div className="todo" key={id}>
-                                            <li className='todo-item'>{task.name}</li>
-                                    </div>
-                                </ul>
-                            </div>
-                            )    
-                        }
-                    }               
-                )
-            )
+            })
         })
+
+        if(pending_tasks.length==0){
+            return(
+                <div className="todo-container">
+                    <p style={{marginLeft:'30px',fontSize:'20px'}}> No pending tasks!</p>
+                </div>)
+        } else {
+            return(
+                pending_tasks.map((name,id) =>{
+                    
+                    return(
+                        
+                        <div className="todo-container">
+                        <ul className="todo-list">
+                            <div className="todo" key={id}>
+                                    <li className='todo-item'>{name}</li>
+                            </div>
+                        </ul>
+                    </div>
+                    ) 
+                })
+            )
+        }  
     }
         
 
