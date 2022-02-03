@@ -94,6 +94,7 @@ function AddPop() {
 
                     <li>Step 18: Clicking on "Tasklist" gives all the pending tasks in all the categories as listed view</li><br/>
                     
+                    <li>Step 19: To start from the beginning, manual deletion of all the list is needed.</li><br/>
                     
                </ul>
             <br/><br/>

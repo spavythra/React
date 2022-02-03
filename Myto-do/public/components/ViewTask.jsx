@@ -3,11 +3,10 @@ import {connect} from "react-redux";
 import Todos from "./Todos";
 import ActionBar from "./Navigation/ActionBar";
 import AddBox from "./AddBox";
-import {filterBoxSelector} from "../store/TodoStore/TodoSelectors";
-import {filterBoxAction} from "../store/TodoStore/TodoActions";
+import {todosSelector} from "../store/TodoStore/TodoSelectors";
 
 const ViewTask = (props) => {
-    const {todos, updateTodoAction,setAppFilters, filter, setFilter,index, deleteTodoAction, remaining, updateTasksAction, updateBoxPositionAction} = props;
+    const {todos, updateTodoAction,setAppFilters, filter, setFilter,index, deleteTodoAction, remaining, updateTasksAction, todosSelector} = props;
     const [currentBox, setCurrentBox] = useState(null)
     const [Categoryfilter, setCategoryfilter] = useState(false)
     const [order,setOrder] = useState('asc')
@@ -66,7 +65,7 @@ const ViewTask = (props) => {
 
 export default connect(
     (state) => ({
-        todos: todosSelector(state),
+        todos: todosSelector(state)
     }),
     (dispatch) => ({
 
