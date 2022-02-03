@@ -24,9 +24,10 @@ class MyDocument extends Document {
         return (
             <Html>
                 <Head />
+                <link rel="shortcut icon" href="#"></link>
                 <body>
                 <Main />
-                <NextScript />
+                    <NextScript />
                 </body>
             </Html>
         )

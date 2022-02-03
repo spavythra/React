@@ -1,17 +1,15 @@
 import React, {useRef, useState} from 'react';
 import TextEditable from "../TextEditable";
-import {Delete, MoreSquare, PaperFail, Setting, Swap,InfoCircle, TickSquare,CloseSquare,Filter,Category,Danger,Discovery,Document} from "react-iconly";
+import {Delete, MoreSquare, PaperFail, Setting, Swap,InfoCircle, TickSquare,CloseSquare,Filter,Category,Danger,Discovery,Document,Calendar,ChevronRightCircle} from "react-iconly";
 import {Link, Tooltip} from "@nextui-org/react";
 import {connect} from "react-redux";
-import {appTitleSelector} from "../../store/CommonStore/CommonSelectors";
-import {updateAppTitle} from "../../store/CommonStore/CommonActions";
 import DropDown from "../Common/DropDown";
 import {useOpen} from "../../Hooks/hook";
-import {deleteAllDone, setAppFilters,filterCategoryAction} from "../../store/TodoStore/TodoActions";
+import {deleteAllDone, setAppFilters, filterCategoryAction, updateTodoAction} from "../../store/TodoStore/TodoActions";
 import { render } from "react-dom";
 import {BrowserRouter as Router, Switch,Routes , Route,Fragment} from 'react-router-dom';
 
-function ActionBar({updateAppTitle, app_title, setAppFilters, filterCategoryAction, deleteAllDone}) {
+function ActionBar({updateAppTitle, updateTodoAction, app_title, setAppFilters, filterCategoryAction, deleteAllDone}) {
     const settingRef = useRef()
     const filterRef = useRef()
     const categoryRef = useRef()
@@ -77,15 +75,48 @@ function ActionBar({updateAppTitle, app_title, setAppFilters, filterCategoryActi
     const handleCategory = () => {
         setCategoryOpen(true)
     }
+    const handleTask = () => {
+        setAppFilters(false)
+    }
     return (<>
         <header className="content_header">
             <div className="content_header--content">
-                <TextEditable isLarge={true} content={app_title} setStore={updateAppTitle}/>
+
+                <div>
+                    <Link href = '/'>  
+                        <h3 className='title_header'>
+                            MyTo-do
+                        </h3>
+                    </Link>
+                </div>
 
                 <div className="content_header--action">
+                
+                <div>
+                    <button className="btn icon-button" >
+                    <ChevronRightCircle set="bold"/>
+
+                        <Link href = '/tasks' >  
+                            <span className="action_label">Tasklist</span>
+                            
+                        </Link>
+                    </button>
+                </div>
+
+                <div>
+                    <Tooltip content= "View Calendar" color="#282828" placement='top' style={open ? {pointerEvents: 'none'}: null}>
+                        <button className="btn icon-button" >
+                        <Calendar set="bold"/>
+                            <Link href = '/calendar' >  
+                            
+                                <span className="action_label">Calendar</span>                  
+                            </Link>
+                        </button>
+                    </Tooltip>
+                </div>
 
                 <Tooltip content= "Filter for lists" color="#282828" placement='top' style={open ? {pointerEvents: 'none'}: null}>
-                <button ref={categoryRef} type="button" className="btn icon-button" aria-label="Sorting options menu" disabled={filterOpen}
+                    <button ref={categoryRef} type="button" className="btn icon-button" aria-label="Sorting options menu" disabled={filterOpen}
                             onClick={handleCategory}>
                         <Category set="bulk"/>
                         <span className="action_label">Category</span>
@@ -94,11 +125,11 @@ function ActionBar({updateAppTitle, app_title, setAppFilters, filterCategoryActi
                 </Tooltip>
                 
                     <Tooltip content= "Overall task filter" color="#282828" placement='top' style={open ? {pointerEvents: 'none'}: null}>
-                    <button ref={filterRef} type="button" className="btn icon-button" aria-label="Sorting options menu" disabled={filterOpen}
+                        <button ref={filterRef} type="button" className="btn icon-button" aria-label="Sorting options menu" disabled={filterOpen}
                             onClick={handleFilter}>
                         <Filter set="bold"/>
                         <span className="action_label">Tasks</span>
-                    </button>
+                        </button>
                     </Tooltip>
 
                     <Tooltip content="Delete completed tasks" color="#282828" placement='bottom' style={open ? {pointerEvents: 'none'}: null}>
@@ -122,17 +153,15 @@ function ActionBar({updateAppTitle, app_title, setAppFilters, filterCategoryActi
 
 export default connect(
     (state) => ({
-        app_title: appTitleSelector(state),
 
     }),
     (dispatch) => ({
-        updateAppTitle: title => dispatch(updateAppTitle(title)),
         deleteAllDone: state => dispatch(deleteAllDone(state)),
         setAppFilters: state => dispatch(setAppFilters(state)),
-        filterCategoryAction: state => dispatch(filterCategoryAction(state))
+        filterCategoryAction: state => dispatch(filterCategoryAction(state)),
+        updateTodoAction: todo => dispatch(updateTodoAction(todo)),
 
     })
 )(ActionBar)
 
-//        critical:(index) => filterCategorySelector(state, index)
 

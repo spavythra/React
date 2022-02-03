@@ -55,9 +55,8 @@ function TaskHeader(props) {
             </div>
             {!isEditing && <div className="box_header--action">
             <Checkbox color="error" className={'category_checkbox'} checked={tododef.critical}
-                            onChange={() => {toggleCategoryAction({tododef, idx: index}) 
-{                            {filterCategoryAction(tododef.critical)}
-}                           console.log(tododef.critical)}}>
+                            onChange={() => {toggleCategoryAction({tododef, idx: index})
+                            {{filterCategoryAction(tododef.critical)}} }}>
                 <div style={{display: 'flex', flexDirection: 'column', marginLeft: -4,fontSize: '14px',fontWeight: 'bold',color: 'red'}}>
                             <p className="category_name">Critical</p>
                         </div>

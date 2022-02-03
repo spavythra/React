@@ -136,7 +136,6 @@ const TodosApp = (props) => {
     }
 
     const renderList = () => {
-        console.log(todos)
         return todos.map((todo, index) => {
             if (todo.categoryfilter === null){
                 return <Todos
@@ -166,7 +165,6 @@ const TodosApp = (props) => {
     return (<>
         <div className="content_wrapper">
             
-            <ActionBar/>
             <DragDropContext
                 onDragUpdate={onDragUpdate}
                 onDragEnd={onDragEnd}
