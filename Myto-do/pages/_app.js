@@ -7,6 +7,7 @@ import {Provider} from "react-redux";
 import Wait from "../Wait";
 import Head from "next/head";
 import Layout from "../public/layout/Layout";
+import App from 'next/app'
 
 function MyApp({ Component, pageProps }) {
     const router = useRouter();
@@ -43,7 +44,7 @@ function MyApp({ Component, pageProps }) {
             </Head>
 
             <LoadingScreen loading={loading} />
-            {!loading && <Provider store={store}>
+            { !loading && <Provider store={store}>
                 <Layout>
                     <Component {...pageProps} />
                 </Layout>
@@ -52,5 +53,6 @@ function MyApp({ Component, pageProps }) {
         </>
     );
 }
+
 
 export default MyApp;

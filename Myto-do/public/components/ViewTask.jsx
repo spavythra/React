@@ -6,14 +6,16 @@ import {
     deleteTodoAction,
     updateBoxPositionAction,
     updateTasksAction,
-    updateTodoAction
+    updateTodoAction,setAppFilters
 } from "../store/TodoStore/TodoActions";
 import ActionBar from "./Navigation/ActionBar";
 import AddBox from "./AddBox";
 import {DragDropContext, Droppable} from "react-beautiful-dnd";
+import {filterBoxSelector} from "../store/TodoStore/TodoSelectors";
+import {filterBoxAction} from "../store/TodoStore/TodoActions";
 
-const TodosApp = (props) => {
-    const {todos, updateTodoAction, deleteTodoAction, remaining, updateTasksAction, updateBoxPositionAction} = props;
+const ViewTask = (props) => {
+    const {todos, updateTodoAction,setAppFilters, filter, setFilter,index, deleteTodoAction, remaining, updateTasksAction, updateBoxPositionAction} = props;
     const [currentBox, setCurrentBox] = useState(null)
     const [Categoryfilter, setCategoryfilter] = useState(false)
     const [order,setOrder] = useState('asc')
@@ -136,8 +138,9 @@ const TodosApp = (props) => {
     }
 
     const renderList = () => {
+        console.log(todos)
         return todos.map((todo, index) => {
-            if (todo.categoryfilter === null){
+            // if (todo.categoryfilter === null){
                 return <Todos
                 remaining={remaining(index).length}
                 title={todo.title}
@@ -147,24 +150,47 @@ const TodosApp = (props) => {
                 deleteTodoAction={deleteTodoAction}
                 key={todo.title + index}
                 tasks={todo.tasks}/>
-            }else if (todo.categoryfilter === todo.critical){
-                return <Todos
-                remaining={remaining(index).length}
-                title={todo.title}
-                filter={todo.filter}
-                index={index}
-                updateTodoAction={updateTodoAction}
-                deleteTodoAction={deleteTodoAction}
-                key={todo.title + index}
-                tasks={todo.tasks}/>
-            }
+            // }else if (todo.categoryfilter === todo.critical){
+            //     return <Todos
+            //     remaining={remaining(index).length}
+            //     title={todo.title}
+            //     filter={todo.filter}
+            //     index={index}
+            //     updateTodoAction={updateTodoAction}
+            //     deleteTodoAction={deleteTodoAction}
+            //     key={todo.title + index}
+            //     tasks={todo.tasks}/>
+            // }
         })
     }
+        // return todos.map((todo, index) => {
+        //     return todo.map((task,id) =>{
+        //         if (todos.task.completed === false){
+        //             return
+        //             <p>
+        //                 <Todos
+        //         remaining={remaining(index).length}
+        //         title={todo.title}
+        //         filter={todo.filter}
+        //         index={index}
+        //         updateTodoAction={updateTodoAction}
+        //         deleteTodoAction={deleteTodoAction}
+        //         key={todo.title + index}
+        //         tasks={todo.tasks}/>
+        //             </p>
+        //         }
+        //     })
+            
+        // })
+    
 
+    console.log(todos)
 
     return (<>
         <div className="content_wrapper">
-            
+           {renderList()} 
+        
+            {/* <ActionBar/>
             <DragDropContext
                 onDragUpdate={onDragUpdate}
                 onDragEnd={onDragEnd}
@@ -178,14 +204,14 @@ const TodosApp = (props) => {
                              {...provided.droppableProps}
                              ref={provided.innerRef}>
 
-                                 {renderList()}
+                                //  {renderList()}
                             
                             {provided.placeholder}
                             <AddBox/>
                         </div>
                     )}
                 </Droppable>
-            </DragDropContext>
+            </DragDropContext> */}
         </div>
     </>);
 }
@@ -195,12 +221,14 @@ export default connect(
         todos: todosSelector(state),
         remaining: (index) => todosRemainingSelector(state, index),
         categoryfilter:(index) => filterCategorySelector(state, index),
+        filter:(index) => filterBoxSelector(state, index),
     }),
     (dispatch) => ({
         updateTodoAction: todo => dispatch(updateTodoAction(todo)),
         updateBoxPositionAction: todo => dispatch(updateBoxPositionAction(todo)),
         updateTasksAction: (todo, index) => dispatch(updateTasksAction(todo, index)),
         deleteTodoAction: todo => dispatch(deleteTodoAction(todo)),
+        setFilter: payload => dispatch(filterBoxAction(payload)),
 
     })
-)(TodosApp)
+)(ViewTask)

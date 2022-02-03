@@ -7,11 +7,11 @@ import {appTitleSelector} from "../../store/CommonStore/CommonSelectors";
 import {updateAppTitle} from "../../store/CommonStore/CommonActions";
 import DropDown from "../Common/DropDown";
 import {useOpen} from "../../Hooks/hook";
-import {deleteAllDone, setAppFilters,filterCategoryAction} from "../../store/TodoStore/TodoActions";
+import {deleteAllDone, setAppFilters, filterCategoryAction, updateTodoAction} from "../../store/TodoStore/TodoActions";
 import { render } from "react-dom";
 import {BrowserRouter as Router, Switch,Routes , Route,Fragment} from 'react-router-dom';
 
-function ActionBar({updateAppTitle, app_title, setAppFilters, filterCategoryAction, deleteAllDone}) {
+function ActionBar({updateAppTitle, updateTodoAction, app_title, setAppFilters, filterCategoryAction, deleteAllDone}) {
     const settingRef = useRef()
     const filterRef = useRef()
     const categoryRef = useRef()
@@ -77,12 +77,28 @@ function ActionBar({updateAppTitle, app_title, setAppFilters, filterCategoryActi
     const handleCategory = () => {
         setCategoryOpen(true)
     }
+    const handleTask = () => {
+        setAppFilters(false)
+    }
     return (<>
         <header className="content_header">
             <div className="content_header--content">
                 <TextEditable isLarge={true} content={app_title} setStore={updateAppTitle}/>
 
                 <div className="content_header--action">
+                {/* <div>
+                <Link as = '/?tasks' href = '/tasks'>  
+                    <a className="action_label">MyTasks</a>
+                    
+                </Link>
+                </div> */}
+
+                <div>
+                <Link href = '/calendar' >  
+                    <a target={'_blank'} className="action_label">Calendar</a>
+                    
+                </Link>
+                </div>
 
                 <Tooltip content= "Filter for lists" color="#282828" placement='top' style={open ? {pointerEvents: 'none'}: null}>
                 <button ref={categoryRef} type="button" className="btn icon-button" aria-label="Sorting options menu" disabled={filterOpen}
@@ -129,10 +145,10 @@ export default connect(
         updateAppTitle: title => dispatch(updateAppTitle(title)),
         deleteAllDone: state => dispatch(deleteAllDone(state)),
         setAppFilters: state => dispatch(setAppFilters(state)),
-        filterCategoryAction: state => dispatch(filterCategoryAction(state))
+        filterCategoryAction: state => dispatch(filterCategoryAction(state)),
+        updateTodoAction: todo => dispatch(updateTodoAction(todo)),
 
     })
 )(ActionBar)
 
-//        critical:(index) => filterCategorySelector(state, index)
 

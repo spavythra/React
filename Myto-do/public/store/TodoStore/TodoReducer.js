@@ -29,6 +29,7 @@ export function todosReducer(state = initialState, action) {
                         completed: false,
                         name: action.payload.value,
                     })
+                    console.log(state)
                     return todo
                 }
                 return todo
@@ -123,6 +124,7 @@ export function todosReducer(state = initialState, action) {
             })
         case FILTER_APP_ACTION:
             return state.map((todo) => {
+                console.log("dddd")
                 return {...todo, filter: action.payload}
             })
         
@@ -131,6 +133,7 @@ export function todosReducer(state = initialState, action) {
                 return {...todo, categoryfilter: action.payload}
             })
         case ADD_BOX_ACTION:
+            console.log(action.payload)
             return [...state, action.payload]
         case DELETE_BOX_ACTION:
             return [
