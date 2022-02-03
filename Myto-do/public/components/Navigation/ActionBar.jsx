@@ -3,8 +3,6 @@ import TextEditable from "../TextEditable";
 import {Delete, MoreSquare, PaperFail, Setting, Swap,InfoCircle, TickSquare,CloseSquare,Filter,Category,Danger,Discovery,Document} from "react-iconly";
 import {Link, Tooltip} from "@nextui-org/react";
 import {connect} from "react-redux";
-import {appTitleSelector} from "../../store/CommonStore/CommonSelectors";
-import {updateAppTitle} from "../../store/CommonStore/CommonActions";
 import DropDown from "../Common/DropDown";
 import {useOpen} from "../../Hooks/hook";
 import {deleteAllDone, setAppFilters, filterCategoryAction, updateTodoAction} from "../../store/TodoStore/TodoActions";
@@ -83,19 +81,26 @@ function ActionBar({updateAppTitle, updateTodoAction, app_title, setAppFilters, 
     return (<>
         <header className="content_header">
             <div className="content_header--content">
-                <TextEditable isLarge={true} content={app_title} setStore={updateAppTitle}/>
+
+            <div>
+                <Link href = '/'>  
+                        <h3 className='title_header'>
+                        <a>MyTo-do</a>
+                    </h3>
+                </Link>
+                </div>
 
                 <div className="content_header--action">
-                {/* <div>
-                <Link as = '/?tasks' href = '/tasks'>  
-                    <a className="action_label">MyTasks</a>
+                
+                <div>
+                <Link href = '/tasks' >  
+                    <a className="action_label">Tasklist</a>
                     
                 </Link>
-                </div> */}
-
+                </div>
                 <div>
                 <Link href = '/calendar' >  
-                    <a target={'_blank'} className="action_label">Calendar</a>
+                    <a className="action_label">Calendar</a>
                     
                 </Link>
                 </div>
@@ -138,11 +143,9 @@ function ActionBar({updateAppTitle, updateTodoAction, app_title, setAppFilters, 
 
 export default connect(
     (state) => ({
-        app_title: appTitleSelector(state),
 
     }),
     (dispatch) => ({
-        updateAppTitle: title => dispatch(updateAppTitle(title)),
         deleteAllDone: state => dispatch(deleteAllDone(state)),
         setAppFilters: state => dispatch(setAppFilters(state)),
         filterCategoryAction: state => dispatch(filterCategoryAction(state)),

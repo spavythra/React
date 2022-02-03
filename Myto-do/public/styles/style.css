@@ -103,6 +103,11 @@ input, textarea {
     word-break: break-word;
 }
 
+.title_header {
+    text-decoration: none;
+    font-size: 20px;
+}
+
 .editable, .btn-editable {
     cursor: text !important;
     /* color: black; */
@@ -285,6 +290,21 @@ h2 {
 .icon-button:hover .action_label {
     /* background-color: #4d4d4d; */
     color: rgba(255, 255, 255, 0.87);
+}
+
+.icon-button:hover .home_label {
+    /* background-color: #4d4d4d; */
+    color: rgba(255, 255, 255, 0.87);
+}
+
+.home_label {
+    font-size: 18px;
+    margin: 0 auto;
+    margin-left: 3px;
+    margin-right: 6px;
+    word-break: normal;
+    color: white;
+    cursor: pointer;
 }
 
 .button {
