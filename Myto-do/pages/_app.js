@@ -46,11 +46,11 @@ function MyApp({ Component, pageProps }) {
 
             <LoadingScreen loading={loading} />
             { !loading && <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}>
-                <Layout>
-                    <Component {...pageProps} />
-                </Layout>
-            </PersistGate>
+                <PersistGate loading={null} persistor={persistor}>
+                    <Layout>
+                        <Component {...pageProps} />
+                    </Layout>
+                </PersistGate>
             </Provider>}
 
         </>

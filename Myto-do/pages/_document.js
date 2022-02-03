@@ -27,7 +27,7 @@ class MyDocument extends Document {
                 <link rel="shortcut icon" href="#"></link>
                 <body>
                 <Main />
-                <NextScript />
+                    <NextScript />
                 </body>
             </Html>
         )

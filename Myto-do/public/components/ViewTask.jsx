@@ -1,16 +1,8 @@
 import React, {useState} from 'react';
 import {connect} from "react-redux";
-import {todosRemainingSelector, todosSelector} from "../store/TodoStore/TodoSelectors";
 import Todos from "./Todos";
-import {
-    deleteTodoAction,
-    updateBoxPositionAction,
-    updateTasksAction,
-    updateTodoAction,setAppFilters
-} from "../store/TodoStore/TodoActions";
 import ActionBar from "./Navigation/ActionBar";
 import AddBox from "./AddBox";
-import {DragDropContext, Droppable} from "react-beautiful-dnd";
 import {filterBoxSelector} from "../store/TodoStore/TodoSelectors";
 import {filterBoxAction} from "../store/TodoStore/TodoActions";
 

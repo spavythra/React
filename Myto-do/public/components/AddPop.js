@@ -88,6 +88,12 @@ function AddPop() {
                     </ul>
 
                     <li>Step 15: Clicking on "Delete" deletes all the tasks which are marked completed in all the categories</li><br/>
+                    <li>Step 16: There are three navigation bars in the page "Myto-do", "Calendar","Tasklist". Clicking on "Myto-do" on right side navigates to home page.</li><br/>
+
+                    <li>Step 17: Clicking on "Calendar" gives a calendar view of tasks listed by date (not linked yet)</li><br/>
+
+                    <li>Step 18: Clicking on "Tasklist" gives all the pending tasks in all the categories as listed view</li><br/>
+                    
                     
                </ul>
             <br/><br/>
