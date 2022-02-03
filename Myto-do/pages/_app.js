@@ -15,17 +15,17 @@ function MyApp({ Component, pageProps }) {
     const [loading, setLoading] = useState(true);
 
     useEffect(async () => {
-        await Wait(0.001)
+        await Wait(100)
         setLoading(false);
 
         const handleStart = async (url) => {
             if (url !== router.pathname)
                 setLoading(true)
-            await Wait(0.001)
+            await Wait(100)
             setLoading(false);
         };
         const handleComplete = async (url) => {
-            await Wait(0.1)
+            await Wait(100)
             setLoading(false)
         };
         router.events.on("routeChangeStart", handleStart);

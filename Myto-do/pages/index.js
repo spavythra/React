@@ -8,12 +8,9 @@ export default function Home() {
     const handleAddTodo = () => {
         console.log("add");
     }
-    // console.log(todos)
     return (<>
         <div>
             <TodosApp/>
-            {/* <ViewTask/> */}
-            
         </div>
         
     </>)

@@ -1,6 +1,6 @@
 import React, {useRef, useState} from 'react';
 import TextEditable from "../TextEditable";
-import {Delete, MoreSquare, PaperFail, Setting, Swap,InfoCircle, TickSquare,CloseSquare,Filter,Category,Danger,Discovery,Document} from "react-iconly";
+import {Delete, MoreSquare, PaperFail, Setting, Swap,InfoCircle, TickSquare,CloseSquare,Filter,Category,Danger,Discovery,Document,Calendar,ChevronRightCircle} from "react-iconly";
 import {Link, Tooltip} from "@nextui-org/react";
 import {connect} from "react-redux";
 import DropDown from "../Common/DropDown";
@@ -82,31 +82,41 @@ function ActionBar({updateAppTitle, updateTodoAction, app_title, setAppFilters, 
         <header className="content_header">
             <div className="content_header--content">
 
-            <div>
-                <Link href = '/'>  
+                <div>
+                    <Link href = '/'>  
                         <h3 className='title_header'>
-                        <a>MyTo-do</a>
-                    </h3>
-                </Link>
+                            MyTo-do
+                        </h3>
+                    </Link>
                 </div>
 
                 <div className="content_header--action">
                 
                 <div>
-                <Link href = '/tasks' >  
-                    <a className="action_label">Tasklist</a>
-                    
-                </Link>
+                    <button className="btn icon-button" >
+                    <ChevronRightCircle set="bold"/>
+
+                        <Link href = '/tasks' >  
+                            <span className="action_label">Tasklist</span>
+                            
+                        </Link>
+                    </button>
                 </div>
+
                 <div>
-                <Link href = '/calendar' >  
-                    <a className="action_label">Calendar</a>
-                    
-                </Link>
+                    <Tooltip content= "View Calendar" color="#282828" placement='top' style={open ? {pointerEvents: 'none'}: null}>
+                        <button className="btn icon-button" >
+                        <Calendar set="bold"/>
+                            <Link href = '/calendar' >  
+                            
+                                <span className="action_label">Calendar</span>                  
+                            </Link>
+                        </button>
+                    </Tooltip>
                 </div>
 
                 <Tooltip content= "Filter for lists" color="#282828" placement='top' style={open ? {pointerEvents: 'none'}: null}>
-                <button ref={categoryRef} type="button" className="btn icon-button" aria-label="Sorting options menu" disabled={filterOpen}
+                    <button ref={categoryRef} type="button" className="btn icon-button" aria-label="Sorting options menu" disabled={filterOpen}
                             onClick={handleCategory}>
                         <Category set="bulk"/>
                         <span className="action_label">Category</span>
@@ -115,11 +125,11 @@ function ActionBar({updateAppTitle, updateTodoAction, app_title, setAppFilters, 
                 </Tooltip>
                 
                     <Tooltip content= "Overall task filter" color="#282828" placement='top' style={open ? {pointerEvents: 'none'}: null}>
-                    <button ref={filterRef} type="button" className="btn icon-button" aria-label="Sorting options menu" disabled={filterOpen}
+                        <button ref={filterRef} type="button" className="btn icon-button" aria-label="Sorting options menu" disabled={filterOpen}
                             onClick={handleFilter}>
                         <Filter set="bold"/>
                         <span className="action_label">Tasks</span>
-                    </button>
+                        </button>
                     </Tooltip>
 
                     <Tooltip content="Delete completed tasks" color="#282828" placement='bottom' style={open ? {pointerEvents: 'none'}: null}>

@@ -11,9 +11,10 @@ export default function tasks(props) {
     const handleShowTodo = () => {
         console.log("add");
     }
-    console.log(todos)
+    
     return (<>
         <div>
+            <h3 style={{marginLeft:'60px',textDecoration:'none',marginBottom:'10px'}}>All Pending Tasks</h3>
             <ViewTask/>
         </div>
         
